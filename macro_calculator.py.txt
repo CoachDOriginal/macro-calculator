@@ -1,0 +1,46 @@
+def calculate_macros(weight, height, age, activity_level, goal):
+    # Basal Metabolic Rate (BMR) using Mifflin-St Jeor Equation
+    bmr = 10 * weight + 6.25 * height - 5 * age + 5  # for men
+    
+    # Activity multipliers
+    activity_multipliers = {
+        "Sedentary": 1.2,
+        "Lightly active": 1.375,
+        "Moderately active": 1.55,
+        "Very active": 1.725,
+        "Super active": 1.9
+    }
+    
+    tdee = bmr * activity_multipliers.get(activity_level, 1.2)
+    
+    # Adjusting for goal
+    if goal == "Fat Loss":
+        tdee *= 0.8  # 20% calorie deficit
+    elif goal == "Muscle Gain":
+        tdee *= 1.1  # 10% calorie surplus
+    
+    # Macronutrient breakdown
+    protein = (weight * 2.2) * 1.6  # grams of protein per kg of body weight
+    fat = (tdee * 0.25) / 9  # 25% of calories from fat
+    carbs = (tdee - (protein * 4 + fat * 9)) / 4  # remaining calories from carbs
+    
+    return round(tdee), round(protein), round(fat), round(carbs)
+
+# Command-line interface for non-interactive execution
+def main():
+    test_cases = [
+        (75, 180, 25, "Moderately active", "Maintenance"),
+        (60, 165, 30, "Lightly active", "Fat Loss"),
+        (85, 190, 28, "Very active", "Muscle Gain"),
+    ]
+    
+    for weight, height, age, activity_level, goal in test_cases:
+        tdee, protein, fat, carbs = calculate_macros(weight, height, age, activity_level, goal)
+        print(f"\nTest Case: Gewicht={weight}kg, Lengte={height}cm, Leeftijd={age}, Activiteit={activity_level}, Doel={goal}")
+        print(f"Caloriebehoefte: {tdee} kcal")
+        print(f"Eiwitten: {protein}g, Vetten: {fat}g, Koolhydraten: {carbs}g")
+    
+    print("🔥 Wil je een op maat gemaakt plan? Boek een gratis call op: https://calendly.com/coachd-macrocall")
+
+if __name__ == "__main__":
+    main()
