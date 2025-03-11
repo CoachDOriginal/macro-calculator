@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Macro Calculator by Coach D</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Macro Calculator</h2>
+        <form method="post">
+            <label>Gewicht (kg):</label>
+            <input type="number" name="weight" required>
+            
+            <label>Lengte (cm):</label>
+            <input type="number" name="height" required>
+            
+            <label>Leeftijd:</label>
+            <input type="number" name="age" required>
+            
+            <label>Activiteitsniveau:</label>
+            <select name="activity_level">
+                <option value="Sedentary">Sedentary</option>
+                <option value="Lightly active">Lightly active</option>
+                <option value="Moderately active">Moderately active</option>
+                <option value="Very active">Very active</option>
+                <option value="Super active">Super active</option>
+            </select>
+            
+            <label>Doel:</label>
+            <select name="goal">
+                <option value="Fat Loss">Fat Loss</option>
+                <option value="Maintenance">Maintenance</option>
+                <option value="Muscle Gain">Muscle Gain</option>
+            </select>
+            
+            <button type="submit">Bereken macro's</button>
+        </form>
+
+        {% if tdee %}
+            <h3>Resultaten:</h3>
+            <p><strong>Caloriebehoefte:</strong> {{ tdee }} kcal</p>
+            <p><strong>Eiwitten:</strong> {{ protein }}g</p>
+            <p><strong>Vetten:</strong> {{ fat }}g</p>
+            <p><strong>Koolhydraten:</strong> {{ carbs }}g</p>
+            <p>🔥 Wil je een op maat gemaakt plan? <a href="https://calendly.com/coachd-macrocall">Boek een gratis call!</a></p>
+        {% endif %}
+    </div>
+</body>
+</html>
